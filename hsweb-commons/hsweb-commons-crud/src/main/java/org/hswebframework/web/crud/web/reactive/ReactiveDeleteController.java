@@ -15,7 +15,7 @@ public interface ReactiveDeleteController<E, K> {
 
     @DeleteMapping("/{id:.+}")
     @DeleteAction
-    @Operation(summary = "根据ID删除")
+    @Operation(summary = "Delete according to ID")
     default Mono<E> delete(@PathVariable K id) {
         return getRepository()
                 .findById(Mono.just(id))

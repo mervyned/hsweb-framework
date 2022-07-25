@@ -76,7 +76,7 @@ public interface ReactiveServiceSaveController<E, K> {
      */
     @PatchMapping
     @SaveAction
-    @Operation(summary = "保存数据", description = "如果传入了id,并且对应数据存在,则尝试覆盖,不存在则新增.")
+    @Operation(summary = "Save data", description = "If an id is passed in and the corresponding data exists, an attempt is made to overwrite it, and if it does not exist, it is added.")
     default Mono<SaveResult> save(@RequestBody Flux<E> payload) {
         return Authentication
                 .currentReactive()
@@ -107,7 +107,7 @@ public interface ReactiveServiceSaveController<E, K> {
      */
     @PostMapping("/_batch")
     @SaveAction
-    @Operation(summary = "批量新增数据")
+    @Operation(summary = "Add data in bulk")
     default Mono<Integer> add(@RequestBody Flux<E> payload) {
 
         return Authentication
@@ -138,7 +138,7 @@ public interface ReactiveServiceSaveController<E, K> {
      */
     @PostMapping
     @SaveAction
-    @Operation(summary = "新增单个数据,并返回新增后的数据.")
+    @Operation(summary = "Add a single piece of data and return the added data.")
     default Mono<E> add(@RequestBody Mono<E> payload) {
         return Authentication
                 .currentReactive()
@@ -167,7 +167,7 @@ public interface ReactiveServiceSaveController<E, K> {
      */
     @PutMapping("/{id}")
     @SaveAction
-    @Operation(summary = "根据ID修改数据")
+    @Operation(summary = "Modify the data according to the ID")
     default Mono<Boolean> update(@PathVariable K id, @RequestBody Mono<E> payload) {
 
         return Authentication

@@ -16,7 +16,7 @@ public interface DeleteController<E, K> {
 
     @DeleteMapping("/{id:.+}")
     @DeleteAction
-    @Operation(summary = "根据ID删除")
+    @Operation(summary = "Delete according to ID")
     default E delete(@PathVariable K id) {
         E data = getRepository()
                 .findById(id)

@@ -36,7 +36,7 @@ public interface ReactiveServiceQueryController<E, K> {
      */
     @GetMapping("/_query/no-paging")
     @QueryAction
-    @QueryNoPagingOperation(summary = "使用GET方式分页动态查询(不返回总数)",
+    @QueryNoPagingOperation(summary = "Dynamically querying using GET pagination (does not return totals)",
             description = "此操作不返回分页总数,如果需要获取全部数据,请设置参数paging=false")
     default Flux<E> query(@Parameter(hidden = true) QueryParamEntity query) {
         return getService()
@@ -72,7 +72,7 @@ public interface ReactiveServiceQueryController<E, K> {
      */
     @PostMapping("/_query/no-paging")
     @QueryAction
-    @Operation(summary = "使用POST方式分页动态查询(不返回总数)",
+    @Operation(summary = "Paged dynamic query using POST (does not return total)",
             description = "此操作不返回分页总数,如果需要获取全部数据,请设置参数paging=false")
     default Flux<E> query(@RequestBody Mono<QueryParamEntity> query) {
         return query.flatMapMany(this::query);
@@ -91,7 +91,7 @@ public interface ReactiveServiceQueryController<E, K> {
      */
     @GetMapping("/_query")
     @QueryAction
-    @QueryOperation(summary = "使用GET方式分页动态查询")
+    @QueryOperation(summary = "Use get to page dynamic queries")
     default Mono<PagerResult<E>> queryPager(@Parameter(hidden = true) QueryParamEntity query) {
         if (query.getTotal() != null) {
             return getService()
@@ -133,7 +133,7 @@ public interface ReactiveServiceQueryController<E, K> {
     @PostMapping("/_query")
     @QueryAction
     @SuppressWarnings("all")
-    @Operation(summary = "使用POST方式分页动态查询")
+    @Operation(summary = "Use THE POST method to page dynamic queries")
     default Mono<PagerResult<E>> queryPager(@RequestBody Mono<QueryParamEntity> query) {
         return query.flatMap(q -> queryPager(q));
     }
@@ -165,7 +165,7 @@ public interface ReactiveServiceQueryController<E, K> {
      */
     @PostMapping("/_count")
     @QueryAction
-    @Operation(summary = "使用POST方式查询总数")
+    @Operation(summary = "Use the POST method to query the total number")
     default Mono<Integer> count(@RequestBody Mono<QueryParamEntity> query) {
         return getService().count(query);
     }
@@ -185,14 +185,14 @@ public interface ReactiveServiceQueryController<E, K> {
      */
     @GetMapping("/_count")
     @QueryAction
-    @QueryNoPagingOperation(summary = "使用GET方式查询总数")
+    @QueryNoPagingOperation(summary = "Use the GET method to query the total number")
     default Mono<Integer> count(@Parameter(hidden = true) QueryParamEntity query) {
         return Mono.defer(() -> getService().count(query));
     }
 
     @PostMapping("/_exists")
     @QueryAction
-    @Operation(summary = "使用POST方式判断数据是否存在")
+    @Operation(summary = "Use the POST method to determine whether the data exists")
     default Mono<Boolean> exists(@RequestBody Mono<QueryParamEntity> query) {
         return query
                 .flatMap(param -> getService()
@@ -217,7 +217,7 @@ public interface ReactiveServiceQueryController<E, K> {
      */
     @GetMapping("/_exists")
     @QueryAction
-    @QueryNoPagingOperation(summary = "使用GET方式判断数据是否存在")
+    @QueryNoPagingOperation(summary = "Use the GET method to determine whether the data exists")
     default Mono<Boolean> exists(@Parameter(hidden = true) QueryParamEntity query) {
         return exists(Mono.just(query));
     }
@@ -236,7 +236,7 @@ public interface ReactiveServiceQueryController<E, K> {
      */
     @GetMapping("/{id:.+}")
     @QueryAction
-    @Operation(summary = "根据ID查询")
+    @Operation(summary = "Query based on ID")
     default Mono<E> getById(@PathVariable K id) {
         return getService()
                 .findById(id)
