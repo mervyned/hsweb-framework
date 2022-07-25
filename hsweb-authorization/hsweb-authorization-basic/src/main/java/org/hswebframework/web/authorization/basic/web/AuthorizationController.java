@@ -47,7 +47,7 @@ import java.util.function.Function;
  */
 @RestController
 @RequestMapping("${hsweb.web.mappings.authorize:authorize}")
-@Tag(name = "授权接口")
+@Tag(name = "Authorization")
 public class AuthorizationController {
 
 
@@ -59,7 +59,7 @@ public class AuthorizationController {
 
     @GetMapping("/me")
     @Authorize
-    @Operation(summary = "当前登录用户权限信息")
+    @Operation(summary = "The currently logged-on user permissions information")
     public Mono<Authentication> me() {
         return Authentication.currentReactive()
                 .switchIfEmpty(Mono.error(UnAuthorizedException::new));
@@ -68,7 +68,7 @@ public class AuthorizationController {
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Authorize(ignore = true)
     @AccessLogger(ignore = true)
-    @Operation(summary = "登录",description = "必要参数:username,password.根据配置不同,其他参数也不同,如:验证码等.")
+    @Operation(summary = "Login",description = "Required parameters: username, password. Depending on the configuration, other parameters are also different, such as: verification code, etc.")
     public Mono<Map<String, Object>> authorizeByJson(@Parameter(example = "{\"username\":\"admin\",\"password\":\"admin\"}")
                                                      @RequestBody Mono<Map<String, Object>> parameter) {
         return doLogin(parameter);

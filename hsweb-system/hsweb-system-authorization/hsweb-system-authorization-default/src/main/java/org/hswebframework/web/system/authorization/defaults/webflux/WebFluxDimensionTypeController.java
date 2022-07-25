@@ -28,7 +28,7 @@ import java.util.List;
 @RequestMapping("/dimension-type")
 @Authorize
 @Resource(id = "dimension", name = "权限维度管理", group = "system")
-@Tag(name = "权限维度类型管理")
+@Tag(name = "Dimension Type")
 public class WebFluxDimensionTypeController implements ReactiveCrudController<DimensionTypeEntity, String> {
 
     @Autowired
@@ -39,7 +39,7 @@ public class WebFluxDimensionTypeController implements ReactiveCrudController<Di
 
     @GetMapping("/all")
     @QueryAction
-    @Operation(summary = "获取全部维度类型")
+    @Operation(summary = "Gets all dimension types")
     public Flux<DimensionTypeResponse> findAllType() {
         return Flux.fromIterable(dimensionProviders)
                 .flatMap(DimensionProvider::getAllType)

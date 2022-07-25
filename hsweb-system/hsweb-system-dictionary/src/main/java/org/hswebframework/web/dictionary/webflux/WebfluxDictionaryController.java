@@ -23,7 +23,7 @@ import reactor.core.publisher.Flux;
 @RestController
 @RequestMapping("/dictionary")
 @Resource(id = "dictionary", name = "数据字典")
-@Tag(name = "数据字典管理")
+@Tag(name = "Data Dictionary")
 public class WebfluxDictionaryController implements ReactiveServiceCrudController<DictionaryEntity, String> {
 
     @Autowired
@@ -39,7 +39,7 @@ public class WebfluxDictionaryController implements ReactiveServiceCrudControlle
 
     @GetMapping("/{id:.+}/items")
     @Authorize(merge = false)
-    @Operation(summary = "获取数据字段的所有选项")
+    @Operation(summary = "Gets all the options for the data field")
     public Flux<EnumDict<?>> getItemDefineById(@PathVariable String id) {
         return repository.getDefine(id)
                 .flatMapIterable(DictDefine::getItems);

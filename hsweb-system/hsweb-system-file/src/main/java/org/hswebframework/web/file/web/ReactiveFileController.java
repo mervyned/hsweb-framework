@@ -26,7 +26,7 @@ import java.io.File;
 @Resource(id = "file", name = "文件上传")
 @Slf4j
 @RequestMapping("/file")
-@Tag(name = "文件上传")
+@Tag(name = "File Upload")
 public class ReactiveFileController {
 
     private final FileUploadProperties properties;
@@ -41,7 +41,7 @@ public class ReactiveFileController {
     @PostMapping("/static")
     @SneakyThrows
     @ResourceAction(id = "upload-static", name = "静态文件")
-    @Operation(summary = "上传静态文件")
+    @Operation(summary = "Upload a static file")
     public Mono<String> uploadStatic(@RequestPart("file")
                                      @Parameter(name = "file", description = "文件", style = ParameterStyle.FORM) Mono<Part> partMono) {
         return partMono

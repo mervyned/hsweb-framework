@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/dimension")
 @Authorize
 @Resource(id = "dimension", name = "权限维度管理", group = "system")
-@Tag(name = "权限维度管理")
+@Tag(name = "Authorization Dimension")
 public class WebFluxDimensionController implements ReactiveServiceCrudController<DimensionEntity, String>
         , ReactiveTreeServiceQueryController<DimensionEntity, String> {
 

@@ -20,7 +20,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/user")
 @Authorize
 @Resource(id = "user", name = "系统用户", group = "system")
-@Tag(name = "用户管理")
+@Tag(name = "User")
 public class WebFluxUserController implements ReactiveServiceQueryController<UserEntity, String> {
 
     @Autowired
@@ -28,7 +28,7 @@ public class WebFluxUserController implements ReactiveServiceQueryController<Use
 
     @PatchMapping
     @SaveAction
-    @Operation(summary = "保存用户信息")
+    @Operation(summary = "Save user information")
     public Mono<Boolean> saveUser(@RequestBody Mono<UserEntity> user) {
         return Authentication
                 .currentReactive()
@@ -43,7 +43,7 @@ public class WebFluxUserController implements ReactiveServiceQueryController<Use
 
 
     @PutMapping("/me")
-    @Operation(summary = "修改当前用户信息")
+    @Operation(summary = "Modify the current user information")
     @ResourceAction(id = "update-self-info",name = "修改当前用户信息")
     public Mono<Boolean> updateLoginUserInfo(@RequestBody UserEntity request) {
         return Authentication
@@ -56,7 +56,7 @@ public class WebFluxUserController implements ReactiveServiceQueryController<Use
 
     @PutMapping("/{id:.+}/{state}")
     @SaveAction
-    @Operation(summary = "修改用户状态")
+    @Operation(summary = "Modify the user state")
     public Mono<Integer> changeState(@PathVariable @Parameter(description = "用户ID") String id,
                                      @PathVariable @Parameter(description = "状态,0禁用,1启用") Byte state) {
         return reactiveUserService.changeState(Mono.just(id), state);
@@ -64,14 +64,14 @@ public class WebFluxUserController implements ReactiveServiceQueryController<Use
 
     @DeleteMapping("/{id:.+}")
     @DeleteAction
-    @Operation(summary = "删除用户")
+    @Operation(summary = "Delete a user")
     public Mono<Boolean> deleteUser(@PathVariable String id) {
         return reactiveUserService.deleteUser(id);
     }
 
     @PutMapping("/passwd")
     @ResourceAction(id = "update-self-pwd",name = "修改当前用户密码")
-    @Operation(summary = "修改当前用户密码")
+    @Operation(summary = "Modify the current user password")
     public Mono<Boolean> changePassword(@RequestBody ChangePasswordRequest request) {
         return Authentication
                 .currentReactive()

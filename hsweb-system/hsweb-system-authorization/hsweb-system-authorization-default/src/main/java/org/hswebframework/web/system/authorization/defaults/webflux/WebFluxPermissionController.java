@@ -26,7 +26,7 @@ import java.util.List;
 @RequestMapping("/permission")
 @Authorize
 @Resource(id = "permission", name = "权限管理", group = "system")
-@Tag(name = "权限管理")
+@Tag(name = "Permission")
 public class WebFluxPermissionController implements ReactiveServiceCrudController<PermissionEntity, String> {
 
     @Autowired
@@ -42,7 +42,7 @@ public class WebFluxPermissionController implements ReactiveServiceCrudControlle
 
     @PutMapping("/status/{status}")
     @SaveAction
-    @Operation(summary = "批量修改权限状态")
+    @Operation(summary = "Modify permission status in bulk")
     public Mono<Integer> changePermissionState(@PathVariable @Parameter(description = "状态值:0禁用,1启用.") Byte status,
                                                @RequestBody List<String> idList) {
 
@@ -60,7 +60,7 @@ public class WebFluxPermissionController implements ReactiveServiceCrudControlle
 
     @GetMapping("/_query/for-grant")
     @ResourceAction(id = "grant", name = "赋权")
-    @QueryNoPagingOperation(summary = "获取用于赋权的权限列表")
+    @QueryNoPagingOperation(summary = "Gets a list of permissions used for authorization")
     public Flux<PermissionEntity> queryForGrant(QueryParamEntity query) {
         return Authentication
                 .currentReactive()

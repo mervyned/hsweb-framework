@@ -22,7 +22,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/autz-setting")
 @Authorize
 @Resource(id = "autz-setting", name = "权限分配", group = "system")
-@Tag(name = "权限分配")
+@Tag(name = "Authorization")
 public class WebFluxAuthorizationSettingController implements ReactiveServiceCrudController<AuthorizationSettingEntity, String> {
 
     @Autowired

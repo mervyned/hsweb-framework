@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/oauth2/client")
 @AllArgsConstructor
 @Resource(id = "oauth2-client", name = "OAuth2客户端管理")
-@Tag(name = "OAuth2客户端管理")
+@Tag(name = "OAuth2 Client")
 public class WebFluxOAuth2ClientController implements ReactiveServiceCrudController<OAuth2ClientEntity, String> {
 
     private final OAuth2ClientService oAuth2ClientService;

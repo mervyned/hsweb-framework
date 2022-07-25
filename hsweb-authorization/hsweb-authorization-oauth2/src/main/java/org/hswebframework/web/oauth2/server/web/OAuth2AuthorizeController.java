@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/oauth2")
 @AllArgsConstructor
-@Tag(name = "OAuth2认证")
+@Tag(name = "OAuth2")
 public class OAuth2AuthorizeController {
 
     private final OAuth2GrantService oAuth2GrantService;
@@ -48,7 +48,7 @@ public class OAuth2AuthorizeController {
     private final OAuth2ClientManager clientManager;
 
     @GetMapping(value = "/authorize", params = "response_type=code")
-    @Operation(summary = "申请授权码,并获取重定向地址", parameters = {
+    @Operation(summary = "Request an authorization code and get the redirect address", parameters = {
             @Parameter(name = "client_id", required = true),
             @Parameter(name = "redirect_uri", required = true),
             @Parameter(name = "state"),
@@ -78,7 +78,7 @@ public class OAuth2AuthorizeController {
     }
 
     @GetMapping(value = "/token")
-    @Operation(summary = "(GET)申请token", parameters = {
+    @Operation(summary = "(GET)token", parameters = {
             @Parameter(name = "client_id"),
             @Parameter(name = "client_secret"),
             @Parameter(name = "code", description = "grantType为authorization_code时不能为空"),
@@ -99,7 +99,7 @@ public class OAuth2AuthorizeController {
 
 
     @PostMapping(value = "/token", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    @Operation(summary = "(POST)申请token", parameters = {
+    @Operation(summary = "(POST)token", parameters = {
             @Parameter(name = "client_id"),
             @Parameter(name = "client_secret"),
             @Parameter(name = "code", description = "grantType为authorization_code时不能为空"),

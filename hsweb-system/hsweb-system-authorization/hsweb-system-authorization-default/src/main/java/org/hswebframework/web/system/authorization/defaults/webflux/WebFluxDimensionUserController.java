@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("/dimension-user")
 @Authorize
 @Resource(id = "dimension", name = "权限维度管理", group = "system")
-@Tag(name = "权限维度用户关联管理")
+@Tag(name = "Dimension Type")
 public class WebFluxDimensionUserController implements ReactiveServiceCrudController<DimensionUserEntity, String> {
 
     @Autowired
@@ -34,7 +34,7 @@ public class WebFluxDimensionUserController implements ReactiveServiceCrudContro
 
     @DeleteAction
     @DeleteMapping("/user/{userId}/dimension/{dimensionId}")
-    @Operation(summary = "解除用户关联的指定维度")
+    @Operation(summary = "Deassociates a specified dimension from a user")
     public Mono<Integer> deleteByUserAndDimensionId(@PathVariable
                                                     @Parameter(description = "用户ID") String userId,
                                                     @PathVariable
@@ -48,7 +48,7 @@ public class WebFluxDimensionUserController implements ReactiveServiceCrudContro
 
     @DeleteAction
     @DeleteMapping("/user/{userId}")
-    @Operation(summary = "解除用户关联的全部维度")
+    @Operation(summary = "Deassociate all dimensions from the user")
     public Mono<Integer> deleteByUserId(@PathVariable
                                         @Parameter(description = "用户ID") String userId) {
         return dimensionUserService
@@ -59,7 +59,7 @@ public class WebFluxDimensionUserController implements ReactiveServiceCrudContro
 
     @DeleteAction
     @DeleteMapping("/dimension/{dimensionId}")
-    @Operation(summary = "解除全部用户关联的指定维度")
+    @Operation(summary = "Unassociates all users from the specified dimension")
     public Mono<Integer> deleteByDimension(@PathVariable
                                            @Parameter(description = "维度ID") String dimensionId) {
         return dimensionUserService
@@ -70,7 +70,7 @@ public class WebFluxDimensionUserController implements ReactiveServiceCrudContro
 
     @DeleteAction
     @PostMapping("/user/{dimensionType}/{dimensionId}/_unbind")
-    @Operation(summary = "解除用户关联的指定维度")
+    @Operation(summary = "Deassociates a specified dimension from a user")
     public Mono<Integer> deleteUserDimension(@PathVariable
                                              @Parameter(description = "维度类型,比如: role") String dimensionType,
                                              @PathVariable

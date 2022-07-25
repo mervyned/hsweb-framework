@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/dictionary-item")
 @Resource(id = "dictionary", name = "数据字典")
-@Tag(name = "数据字典选项管理")
+@Tag(name = "Data Dictionary")
 public class WebfluxDictionaryItemController implements ReactiveServiceCrudController<DictionaryItemEntity, String> {
 
     @Autowired
