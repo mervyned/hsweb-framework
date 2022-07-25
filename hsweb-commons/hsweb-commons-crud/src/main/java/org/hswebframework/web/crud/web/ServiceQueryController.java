@@ -44,7 +44,7 @@ public interface ServiceQueryController<E, K> {
      */
     @GetMapping("/_query/no-paging")
     @QueryAction
-    @QueryOperation(summary = "使用GET方式分页动态查询(不返回总数)",
+    @QueryOperation(summary = "Dynamically querying using GET pagination (does not return totals)",
             description = "此操作不返回分页总数,如果需要获取全部数据,请设置参数paging=false")
     default List<E> query(@Parameter(hidden = true) QueryParamEntity query) {
         return getService()
@@ -80,7 +80,7 @@ public interface ServiceQueryController<E, K> {
      */
     @PostMapping("/_query/no-paging")
     @QueryAction
-    @Operation(summary = "使用POST方式分页动态查询(不返回总数)",
+    @Operation(summary = "Paged dynamic query using POST (does not return total)",
             description = "此操作不返回分页总数,如果需要获取全部数据,请设置参数paging=false")
     default List<E> postQuery(@RequestBody QueryParamEntity query) {
         return this.query(query);
@@ -100,7 +100,7 @@ public interface ServiceQueryController<E, K> {
      */
     @GetMapping("/_query")
     @QueryAction
-    @QueryOperation(summary = "使用GET方式分页动态查询")
+    @QueryOperation(summary = "Use get to page dynamic queries")
     default PagerResult<E> queryPager(@Parameter(hidden = true) QueryParamEntity query) {
         if (query.getTotal() != null) {
             return PagerResult
@@ -127,14 +127,14 @@ public interface ServiceQueryController<E, K> {
     @PostMapping("/_query")
     @QueryAction
     @SuppressWarnings("all")
-    @Operation(summary = "使用POST方式分页动态查询")
+    @Operation(summary = "Use THE POST method to page dynamic queries")
     default PagerResult<E> postQueryPager(@RequestBody QueryParamEntity query) {
         return queryPager(query);
     }
 
     @PostMapping("/_count")
     @QueryAction
-    @Operation(summary = "使用POST方式查询总数")
+    @Operation(summary = "Use the POST method to query the total number")
     default int postCount(@RequestBody QueryParamEntity query) {
          return this.count(query);
     }
@@ -151,7 +151,7 @@ public interface ServiceQueryController<E, K> {
      */
     @GetMapping("/_count")
     @QueryAction
-    @QueryNoPagingOperation(summary = "使用GET方式查询总数")
+    @QueryNoPagingOperation(summary = "Use the GET method to query the total number")
     default int count(@Parameter(hidden = true) QueryParamEntity query) {
         return getService()
                 .createQuery()
@@ -161,7 +161,7 @@ public interface ServiceQueryController<E, K> {
 
     @GetMapping("/{id:.+}")
     @QueryAction
-    @Operation(summary = "根据ID查询")
+    @Operation(summary = "Query based on ID")
     default E getById(@PathVariable K id) {
        return getService()
                 .findById(id)
